@@ -1,5 +1,6 @@
 
 module.exports  = {
     Di: require('./di-instance'),
-    Provider: require('./provider')
+    Provider: require('./provider'),
+    DiSimple: require('./base-di')
 };
