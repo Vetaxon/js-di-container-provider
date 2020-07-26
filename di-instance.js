@@ -8,6 +8,7 @@ class Di extends BaseDi {
         super();
         this._providers = new Map();
         this._initializedProviders = new Map();
+        this._isProvidersInites = true;
     }
 
     get(alias) {
@@ -20,9 +21,6 @@ class Di extends BaseDi {
      * @return {void}
      */
     setProvider (provider) {
-        if (!(provider instanceof Provider)) {
-            throw new DiException('Argument must be instance of Provider');
-        }
 
         if (typeof provider.provide !== 'function') {
             throw new DiException('Provider must has method "provide"');
@@ -35,6 +33,7 @@ class Di extends BaseDi {
         }
 
         this._providers.set(alias, provider.provide);
+        this._isProvidersInites = false;
     }
 
     /**
@@ -50,7 +49,7 @@ class Di extends BaseDi {
      */
     _initializeProviders() {
 
-        if (this._providers.size === this._initializedProviders.size) {
+        if (this._isProvidersInites) {
             return;
         }
 
@@ -60,6 +59,8 @@ class Di extends BaseDi {
                 this._initializedProviders.set(alias, provide);
             }
         });
+
+        this._isProvidersInites = true;
     }
 }
 

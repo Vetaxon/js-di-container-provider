@@ -15,7 +15,7 @@ class BaseDi {
     set (alias, callback, isSingleton = true) {
 
         if (typeof alias !== 'string' || !alias.length) {
-            throw new DiException('Alias must me string.');
+            throw new DiException('Alias must be string.');
         }
 
         if (this._instances.has(alias)) {
@@ -35,7 +35,7 @@ class BaseDi {
      */
     get (alias) {
         if (typeof alias !== 'string' || !alias.length) {
-            throw new DiException('Alias must me string.');
+            throw new DiException('Alias must be string.');
         }
 
         if (!this._instances.has(alias)) {
@@ -44,14 +44,15 @@ class BaseDi {
 
         const instance = this._instances.get(alias);
 
-        if (instance.isSingleton && instance.entity) {
+        if (!instance.isSingleton) {
+            return instance.callback(this);
+        }
+
+        if (instance.entity) {
             return instance.entity;
         }
 
-        if (!instance.entity) {
-            instance.entity = instance.callback(this);
-            return instance.entity;
-        }
+        instance.entity = instance.callback(this);
 
         return instance.entity;
     }
@@ -65,7 +66,7 @@ class BaseDi {
     replace (alias, callback, isSingleton = true) {
 
         if (typeof alias !== 'string' || !alias.length) {
-            throw new DiException('Alias must me string.');
+            throw new DiException('Alias must be string.');
         }
 
         if (!this._instances.has(alias)) {

@@ -1,17 +1,28 @@
 {
   "name": "js-di-container-provider",
-  "version": "0.1.1",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Simple and advanced, 100% tested dependency injection with providers for nodejs",
   "main": "di.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc --reporter=text mocha ./tests"
   },
-  "keywords": [],
+  "keywords": [
+    "di",
+    "dependency injection",
+    "js",
+    "nodejs"
+  ],
   "author": "Vitalii Ivanov",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Vetaxon/js-di-container-provider.git"
   },
-  "homepage": "https://github.com/Vetaxon/js-di-container-provider#readme"
+  "homepage": "https://github.com/Vetaxon/js-di-container-provider#readme",
+  "devDependencies": {
+    "@types/mocha": "^8.0.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "sinon": "^9.0.2"
+  }
 }

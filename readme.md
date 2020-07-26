@@ -79,3 +79,8 @@ class FooProvider extends Provider {
 }
 ```
 
+### Test (100% covered)
+```
+    npm run test
+```
+
