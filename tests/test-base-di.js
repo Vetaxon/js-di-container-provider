@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 
-const BaseDi = require('./../base-di');
-const diException = require('./../diException');
+const BaseDi = require('../src/base-di');
+const diException = require('../src/diException');
 
 describe('BaseDi', function () {
     const baseDi = new BaseDi();

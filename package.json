@@ -1,8 +1,8 @@
 {
   "name": "js-di-container-provider",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple and advanced, 100% tested dependency injection with providers for nodejs",
-  "main": "di.js",
+  "main": "src/di.js",
   "scripts": {
     "test": "nyc --reporter=text mocha ./tests"
   },

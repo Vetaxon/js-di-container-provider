@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 
-const Provider = require('./../provider');
+const Provider = require('../src/provider');
 
 describe('Provider', function () {
 

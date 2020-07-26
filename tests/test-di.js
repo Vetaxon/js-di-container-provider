@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 
-const diException = require('./../diException');
-const Di = require('./../di-instance');
+const diException = require('../src/diException');
+const Di = require('../src/di-instance');
 
 describe('Di', function () {
 
