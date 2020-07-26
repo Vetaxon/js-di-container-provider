@@ -1,0 +1,17 @@
+{
+  "name": "js-di-container-provider",
+  "version": "0.0.1",
+  "description": "",
+  "main": "di.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Vitalii Ivanov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vetaxon/js-di-container-provider.git"
+  },
+  "homepage": "https://github.com/Vetaxon/js-di-container-provider#readme"
+}
