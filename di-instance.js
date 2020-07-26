@@ -1,40 +1,64 @@
 const DiException = require('./diException');
+const BaseDi = require('./base-di');
 const Provider = require('./provider');
 
-class Di extends Provider {
+class Di extends BaseDi {
+
+    constructor() {
+        super();
+        this._providers = new Map();
+        this._initializedProviders = new Map();
+    }
+
+    get(alias) {
+        this._initializeProviders();
+        return super.get(alias);
+    }
 
     /**
-     * @param {string} alias
-     * @param {function} callback
-     * @param {boolean} isSingleton
-     * @return void
+     * @param {Provider} provider
+     * @return {void}
      */
-    replace(alias, callback, isSingleton = true) {
-
-        if (typeof alias !== 'string' || !alias.length) {
-            throw new DiException('Alias must me string.');
+    setProvider (provider) {
+        if (!(provider instanceof Provider)) {
+            throw new DiException('Argument must be instance of Provider');
         }
 
-        if (!this._instances.has(alias)) {
-            throw new DiException(`Entity with name "${alias}" not found. Nothing to replace.`);
+        if (typeof provider.provide !== 'function') {
+            throw new DiException('Provider must has method "provide"');
         }
 
-        this._instances.delete(alias);
+        const alias = provider.name || provider.constructor.name;
 
-        this._instances.set(alias, {
-            isSingleton: isSingleton,
-            callback: callback,
-            entity: null
-        });
+        if (this._providers.has(alias)) {
+            throw new DiException(`Provider with alias ${alias} already exist`);
+        }
+
+        this._providers.set(alias, provider.provide);
+    }
+
+    /**
+     * @return {Map}
+     */
+    getProviders () {
+        return this._providers;
     }
 
 
     /**
-     * @param {Provider} provider
+     * @return {void}
      */
-    setProvider(provider) {
-        provider.getInstances().forEach((instance, key) => {
-            this.set(key, instance.callback, instance.isSingleton);
+    _initializeProviders() {
+
+        if (this._providers.size === this._initializedProviders.size) {
+            return;
+        }
+
+        this._providers.forEach((provide, alias) => {
+            if (!this._initializedProviders.has(alias)) {
+                provide(this);
+                this._initializedProviders.set(alias, provide);
+            }
         });
     }
 }
