@@ -1,6 +1,6 @@
 {
   "name": "js-di-container-provider",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "di.js",
   "scripts": {
